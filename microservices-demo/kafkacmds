@@ -1,0 +1,7 @@
+docker run -it --network=host confluentinc/cp-kafkacat kafkacat -L -b localhost:19092
+-----------------------------------------------------------------------------
+kafka-topics --bootstrap-server localhost:9092 --version
+kafka-console-consumer --bootstrap-server localhost:9092 --topic twitter-topic --from-beginning
+
+kafka-console-consumer --bootstrap-server kafka:9092 --topic <topic_name> [--from-beginning]
+

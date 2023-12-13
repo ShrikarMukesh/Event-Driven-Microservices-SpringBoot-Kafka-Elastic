@@ -1,0 +1,22 @@
+docker-compose -f common.yml -f kafka_cluster.yml up
+
+docker-compose -f common.yml -f kafka_cluster.yml down
+
+removing all unused containers: docker rm $(docker ps -a -q -f status=exited)
+remove all docker volumes: docker volume prune -f
+
+docker run -it --network=host confluentinc/cp-kafkacat kafkacat -L -b localhost:19092
+Kafka cat utility:
+https://hub.docker.com/r/confluentinc/cp-kafkacat/
+
+docker network ls
+
+docker run --tty \
+           --network docker-compose_application \
+           confluentinc/cp-kafkacat \
+           kafkacat -b kafka:29092 \
+                    -L
+kafkacat -L -b localhost:19092
+
+# List brokers and topics in cluster
+$ docker run -it --network=host edenhill/kcat:1.7.1 -b YOUR_BROKER -L

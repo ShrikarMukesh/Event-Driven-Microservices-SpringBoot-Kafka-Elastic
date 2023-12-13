@@ -18,7 +18,7 @@ public class TwitterKafkaProducer implements KafkaProducer<Long, TwitterAvroMode
 
     private static final Logger LOG = LoggerFactory.getLogger(TwitterKafkaProducer.class);
 
-    private final KafkaTemplate<Long, TwitterAvroModel> kafkaTemplate;
+    private KafkaTemplate<Long, TwitterAvroModel> kafkaTemplate;
 
     public TwitterKafkaProducer(KafkaTemplate<Long, TwitterAvroModel> template) {
         this.kafkaTemplate = template;
@@ -42,7 +42,6 @@ public class TwitterKafkaProducer implements KafkaProducer<Long, TwitterAvroMode
 
     private void addCallback(String topicName, TwitterAvroModel message,
                              ListenableFuture<SendResult<Long, TwitterAvroModel>> kafkaResultFuture) {
-
         kafkaResultFuture.addCallback(new ListenableFutureCallback<>() {
             @Override
             public void onFailure(Throwable throwable) {
